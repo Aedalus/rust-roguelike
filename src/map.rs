@@ -5,6 +5,11 @@ use specs::prelude::*;
 
 use super::Rect;
 
+// Constants
+const MAPWIDTH: usize = 80;
+const MAPHEIGHT: usize = 50;
+const MAPCOUNT: usize = MAPHEIGHT * MAPWIDTH;
+
 #[derive(PartialEq, Copy, Clone)]
 pub enum TileType {
     Wall,
@@ -58,14 +63,14 @@ impl Map {
     /// This gives a handful of random rooms and corridors joining them together.
     pub fn new_map_rooms_and_corridors() -> Map {
         let mut map = Map {
-            tiles: vec![TileType::Wall; 80 * 50],
+            tiles: vec![TileType::Wall; MAPCOUNT],
             rooms: Vec::new(),
-            width: 80,
-            height: 50,
-            revealed_tiles: vec![false; 80 * 50],
-            visibile_tiles: vec![false; 80 * 50],
-            blocked: vec![false; 80 * 50],
-            tile_content: vec![Vec::new(); 80 * 50],
+            width: MAPWIDTH as i32,
+            height: MAPHEIGHT as i32,
+            revealed_tiles: vec![false; MAPCOUNT],
+            visibile_tiles: vec![false; MAPCOUNT],
+            blocked: vec![false; MAPCOUNT],
+            tile_content: vec![Vec::new(); MAPCOUNT],
         };
 
         const MAX_ROOMS: i32 = 30;
